@@ -2,11 +2,74 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Group;
+use App\Models\Speciality;
 use Illuminate\Http\Request;
 
 class GroupController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
     public function index() {
-        return view('groups');
+        $groups = Group::all();
+//        dd('group');
+        return view('group.index', compact('groups'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        $specialities = Speciality::all();
+        return view('group.create', compact('specialities'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+
+        Group::create($request->all());
+        return redirect()->route('groups.index');
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(Group $group)
+    {
+        Group::with('students')->find('group_id');
+        return view('group.show', compact('group'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit($id)
+    {
+        $group = Group::find($id);
+        $specialities = Speciality::all();
+        return view('group.edit', compact('group', 'specialities'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, Group $group)
+    {
+        $group->update($request->all());
+        return redirect()->route('groups.index');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Group $group)
+    {
+        $group->delete();
+        return redirect()->route('groups.index');
     }
 }
