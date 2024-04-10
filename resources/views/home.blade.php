@@ -1,5 +1,5 @@
 @extends('layouts.layout')
-@section('title', 'Home page')
+@section('title', 'student page')
 @section('content')
     <div class="container">
         <div>
