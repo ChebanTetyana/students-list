@@ -1,5 +1,5 @@
 @extends('layouts.layout')
-
+@section('title', 'Create student')
 @section('content')
     <div class="container-custom">
         <h1 class="text-center mt-4 mb-4">Create Student</h1>
@@ -16,16 +16,22 @@
                     <input type="text" name="lastName" class="form-control" id="lastNameStudent" required>
                 </div>
                 <div class="mb-3">
-                    <label for="rating" class="form-label fw-bold">Rating:</label>
-                    <select name="rating" class="form-select" id="rating" required>
-                        <option selected>Select Rating</option>
-                        @for($i = 1; $i <= 5; $i++)
-                            <option value="{{ $i }}">{{ $i }}</option>
-                        @endfor
+                    <label for="group" class="form-label fw-bold">Group:</label>
+                    <select name="group" class="form-select" id="group" required>
+                        <option selected>Select Group</option>
+                        @foreach($groups as $group)
+                            <option value="{{ $group->id }}">{{ $group->name }}</option>
+                        @endforeach
                     </select>
                 </div>
-                <button type="submit" class="btn btn-primary mt-2">Create</button>
-
+                <div class="mb-3">
+                    <label for="rating" class="form-label fw-bold">Rating:</label>
+                    <input type="number" name="rating" class="form-control" id="rating" min="0" max="5" required>
+                </div>
+                <div class="d-flex gap-3 pt-3">
+                    <button type="submit" class="btn btn-primary">Create</button>
+                    <a href="{{ route('students.index') }}" class="btn btn-primary">Cancel</a>
+                </div>
             </form>
         </div>
     </div>

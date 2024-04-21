@@ -20,4 +20,11 @@ class Student extends Model
     {
         return $this->belongsTo(Group::class);
     }
+
+    public function speciality()
+    {
+        return $this->belongsTo(Speciality::class, 'speciality_id');
+    }
+
+
 }

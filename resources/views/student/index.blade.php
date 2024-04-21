@@ -1,28 +1,29 @@
 @extends('layouts.layout')
-@section('title', 'Student list')
+@section('title', 'Students list')
 @section('content')
     <div class="container-custom">
         <h1 class="text-center">List of Students</h1>
-        <div class="d-flex justify-content-between mt-3 mb-4">
+        <div class="d-flex justify-content-center gap-3 mt-3 mb-4">
             <a href="{{ route('students.create') }}" class="btn btn-primary btn-sm"><i class="bi bi-plus"></i> Create Student</a>
             <a href="{{ route('students.sortByRating') }}" class="btn btn-primary btn-sm">Sort by Rating</a>
             <a href="{{ route('students.sortByCreationDate') }}" class="btn btn-primary btn-sm">Sort by Creation Date</a>
         </div>
-
         <table class="table">
             <thead>
-            <tr class="text-center">
-                <th>Full Name</th>
-                <th>Group</th>
-                <th>Rating</th>
-                <th>Action</th>
-            </tr>
+                <tr class="text-center">
+                    <th>Full Name</th>
+                    <th>Group</th>
+                    <th>Speciality</th>
+                    <th>Rating</th>
+                    <th>Action</th>
+                </tr>
             </thead>
             <tbody>
             @foreach($students as $student)
                 <tr>
-                    <td><a href="{{ route('students.show', $student) }}" class="text-decoration-none color text-secondary">{{ $student->name }} {{ $student->lastName }}</a></td>
+                    <td class="color text-secondary">{{ $student->name }} {{ $student->lastName }}</td>
                     <td>{{ $student->group->name }}</td>
+                    <td>{{ optional($student->group->speciality)->name }}</td>
                     <td class="text-center">{{ $student->rating }}</td>
                     <td class="d-flex gap-3 justify-content-center">
                         <a href="{{ route('students.edit', $student) }}" class="btn btn-primary" style="width: 100px">Edit</a>

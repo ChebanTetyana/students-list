@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Group;
+use App\Models\Speciality;
 use App\Models\Student;
 use Illuminate\Http\Request;
 
@@ -12,9 +13,9 @@ class StudentController extends Controller
      * Display a listing of the resource.
      */
     public function index() {
-        $students = Student::paginate(15);
-        return view('student.index', ['students' => $students]);
-
+        $students = Student::paginate(10);
+        $specialities = Speciality::all();
+        return view('student.index', compact('students','specialities'));
     }
 
     /**
@@ -22,7 +23,8 @@ class StudentController extends Controller
      */
     public function create()
     {
-        return view('student.create');
+        $groups = Group::all();
+        return view('student.create', compact('groups'));
     }
 
     /**
@@ -31,22 +33,12 @@ class StudentController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-//        dd($data);
         if (!array_key_exists('group_id', $data)) {
         $data['group_id'] = rand(1, 36);
         }
 
         Student::create($data);
         return redirect()->route('students.index');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show($id)
-    {
-        $student = Student::with('group')->find($id);
-        return view('student.show', compact('student'));
     }
 
     /**
@@ -66,6 +58,19 @@ class StudentController extends Controller
     {
         $student->update($request->all());
         return redirect()->route('students.index');
+
+//        $request->validate([
+//            'rating' => 'required|numeric|min:0|max:5',
+//        ]);
+//
+//        $student->update([
+//            'name' => $request->input('name'),
+//            'lastName' => $request->input('lastName'),
+//            'group_id' => $request->input('group'),
+//            'rating' => $request->input('rating'),
+//        ]);
+//
+//        return redirect()->route('students.index');
     }
 
     /**
@@ -83,12 +88,9 @@ class StudentController extends Controller
         return view('student.index', ['students' => $studentsByRating]);
     }
 
-
     public function sortByCreationDate()
     {
         $studentsByCreationDate = Student::orderBy('created_at', 'asc')->paginate(10);
         return view('student.index', ['students' => $studentsByCreationDate]);
     }
-
-
 }
