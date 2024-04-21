@@ -58,19 +58,6 @@ class StudentController extends Controller
     {
         $student->update($request->all());
         return redirect()->route('students.index');
-
-//        $request->validate([
-//            'rating' => 'required|numeric|min:0|max:5',
-//        ]);
-//
-//        $student->update([
-//            'name' => $request->input('name'),
-//            'lastName' => $request->input('lastName'),
-//            'group_id' => $request->input('group'),
-//            'rating' => $request->input('rating'),
-//        ]);
-//
-//        return redirect()->route('students.index');
     }
 
     /**

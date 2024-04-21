@@ -4,7 +4,7 @@
     <div class="container-custom">
         <h1 class="text-center">List of Students</h1>
         <div class="d-flex justify-content-center gap-3 mt-3 mb-4">
-            <a href="{{ route('students.create') }}" class="btn btn-primary btn-sm"><i class="bi bi-plus"></i> Create Student</a>
+            <a href="{{ route('students.create') }}" class="btn btn-primary btn-sm">Create Student</a>
             <a href="{{ route('students.sortByRating') }}" class="btn btn-primary btn-sm">Sort by Rating</a>
             <a href="{{ route('students.sortByCreationDate') }}" class="btn btn-primary btn-sm">Sort by Creation Date</a>
         </div>

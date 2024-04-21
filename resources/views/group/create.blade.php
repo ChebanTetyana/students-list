@@ -6,7 +6,6 @@
         <div>
             <form action="{{ route('groups.store') }}" method="POST">
                 @csrf
-
                 <div class="mb-3">
                     <label for="name" class="form-label">Group name:</label>
                     <input type="text" name="name" class="form-control" id="nameGroup" required>
