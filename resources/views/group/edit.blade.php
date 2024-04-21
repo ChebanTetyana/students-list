@@ -11,7 +11,7 @@
                 <input type="text" name="name" class="form-control" id="nameGroup" value="{{ $group->name }}" required>
             </div>
             <div class="mb-3">
-                <label for="speciality_id" class="form-label">Group name:</label>
+                <label for="speciality_id" class="form-label">Speciality:</label>
                 <select name="speciality_id" class="form-select" id="speciality_id" required>
                     <option selected>Select Speciality</option>
                     @foreach($specialities as $speciality)
@@ -20,7 +20,10 @@
                     @endforeach
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary">Update</button>
+            <div class="d-flex gap-3 pt-3">
+                <button type="submit" class="btn btn-primary">Update</button>
+                <a href="{{ route('groups.index') }}" class="btn btn-primary">Cancel</a>
+            <div>
         </form>
     </div>
 @endsection

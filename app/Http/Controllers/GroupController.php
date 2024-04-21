@@ -12,9 +12,9 @@ class GroupController extends Controller
      * Display a listing of the resource.
      */
     public function index() {
-        $groups = Group::all();
+        $groups = Group::paginate(10);
 //        dd('group');
-        return view('group.index', compact('groups'));
+        return view('group.index', ['groups'=>$groups]);
     }
 
     /**
@@ -42,7 +42,8 @@ class GroupController extends Controller
     public function show(Group $group)
     {
         Group::with('students')->find('group_id');
-        return view('group.show', compact('group'));
+        $students = $group->students()->get();
+        return view('group.show', compact('group', 'students'));
     }
 
     /**

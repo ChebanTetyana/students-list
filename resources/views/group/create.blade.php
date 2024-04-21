@@ -1,5 +1,5 @@
 @extends('layouts.layout')
-@section('title', 'group')
+@section('title', 'Create group')
 @section('content')
     <div class="container-custom">
         <h1 class="text-center">Create Group</h1>
@@ -20,8 +20,10 @@
                         @endforeach
                     </select>
                 </div>
-                <button type="submit" class="btn btn-primary">Create</button>
-
+                <div class="d-flex gap-3 pt-3">
+                    <button type="submit" class="btn btn-primary">Create</button>
+                    <a href="{{ route('groups.index') }}" class="btn btn-primary">Cancel</a>
+                </div>
             </form>
         </div>
     </div>
